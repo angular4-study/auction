@@ -9,14 +9,25 @@
 
 
 
-文件目录详解：
-e2e: 做自动化测试的
+## 文件目录详解：
+- []e2e: 做自动化测试的
+- angular-cli.json : angular命令行工具配置文件
+- karma.conf.js : 一个单元测试执行器的配置文件，做自动化测试的
+- package.json : 一个标准的npm配置文件，(应用所使用的第三方依赖包)
+- protractor.conf.js : 用来做自动化测试的配置文件
+- tslint.json : 是tslint的配置文件，用来定义typescript代码质量检查规则
 
-src: 应用源代码目录
-	angular-cli.json : angular命令行工具配置文件
-
-
-
+- []src: 应用源代码目录
+	- []app ： 应用程序源码所在地
+		- app.component.ts : 是整个应用的基础，就像房子的地基
+	- []assets: 用来存放静态资源
+	- []environments : 环境配置(开发，生产，测试)
+	- index.html : 整个页面的根页面
+	- main.ts ： 整个web应用的入口点，脚本执行的入口点，angualr通过执行这个文件来启动项目
+	- polyfills.ts : 用来导入必要库，是angular可以正常运行在某些老版本浏览器上
+	- styles.css : 存放整个应用全局的样式
+	- test.ts : 用来做自动化测试的
+	- tsconfig.json : 是typescript编译器的配置，不用改
 
 # Auction
 
