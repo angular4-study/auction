@@ -1,3 +1,23 @@
+cnpm install -g @angular/cli #安装angular命令行工具
+ng -v # 查看安装成功版本
+ng new auction # 在当前目录快速创建一个叫auction的项目
+
+在github创建一个auction同名仓库
+git remote add origin git@github.com:dingziyang/auction.git # 关联远程仓库
+git fetch --all # 取出所有
+git push --force origin master # 强行push到远程master
+
+
+
+文件目录详解：
+e2e: 做自动化测试的
+
+src: 应用源代码目录
+	angular-cli.json : angular命令行工具配置文件
+
+
+
+
 # Auction
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.9.
