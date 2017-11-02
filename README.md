@@ -1,4 +1,4 @@
-- cnpm install -g @angular/cli #安装angular命令行工具
+- npm install -g @angular/cli #安装angular命令行工具
 - ng -v # 查看安装成功版本
 - ng new auction # 在当前目录快速创建一个叫auction的项目
 
@@ -28,6 +28,20 @@
 	- styles.css : 存放整个应用全局的样式
 	- test.ts : 用来做自动化测试的
 	- tsconfig.json : 是typescript编译器的配置，不用改
+
+
+## 1.安装第三方插件
+- 在项目目录下，npm install jquery --save # --save是要把这个依赖记到当前npm的package.json文件中
+- npm install bootstrap --save
+
+## 2.引入第三方插件
+- 在angular-cli.json 中，找到apps下面的styles和scripts，将jquery和botstrap对应的js和css写进去
+- npm install @types/jquery --save-dev # 装jquery的typescript的类型描述文件，是让typescript认识jquery的代码
+- npm install @types/bootstrap --save-dev # 装bootstrap的typescript的类型描述文件，是让typescript认识bootstrap的代码
+
+## 3.使用angular命令行工具，生成组件
+- ng g component myname
+- 上面的命令会在app目录下创建 myname的文件夹，里面有4个文件，然后会更新app.moudle.ts 里面的模块组件配置
 
 # Auction
 
