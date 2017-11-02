@@ -1,3 +1,16 @@
-<p>
-  product works!
-</p>
+<!-- 循环products这个属性，每次迭代的是product  -->
+<div *ngFor="let product of products" class="col-md-4 col-sm-4 col-lg-4">
+  <div class="thumbnail">
+    <!-- 标签绑定：把HTML的一个标签的属性和controller上的一个属性绑定 -->
+    <img [src]="imgUrl">
+    <div class="caption">
+      <h4 class="pull-right">{{product.price}}元</h4>
+      <h4 ><a>{{product.title}}</a></h4>
+      <p>{{product.desc}}</p>
+    </div>
+    <div>
+      <!-- 输入属性：将父组件的值传递到子组件  -->
+      <app-stars [rating]="product.rating"></app-stars>
+    </div>
+  </div>
+</div>

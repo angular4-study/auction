@@ -1,3 +1,6 @@
 <p>
-  stars works!
+  <span *ngFor="let star of stars" class="glyphicon glyphicon-star"
+        [class.glyphicon-star-empty]="star"></span>
+  <span>{{rating}}星</span>
+  <!-- span元素是否出现被包裹的样式，取决于star值是true还是false，true为显示 (注释不能写在标签里)-->
 </p>
