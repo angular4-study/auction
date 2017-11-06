@@ -11,6 +11,9 @@ import { SearchComponent } from './search/search.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { ProductComponent } from './product/product.component';
 import { StarsComponent } from './stars/stars.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { HomeComponent } from './home/home.component';
+import {RouterModule, Routes} from '@angular/router';
 
 /**
  * 模块
@@ -20,20 +23,30 @@ import { StarsComponent } from './stars/stars.component';
  * providers： 声明模块中提供什么服务（只能声明服务）
  * bootstrap： 声明模块的 [主] 组件
  */
+//手动配置路由写法
+const routeConfig : Routes = [
+  {path: '', component: HomeComponent},
+  {path: 'product/:prodTitle', component: ProductDetailComponent}
+];
+
+
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
-    FooterComponent,
-    SearchComponent,
     CarouselComponent,
+    FooterComponent,
+    NavbarComponent,
+    SearchComponent,
+    StarsComponent,
     ProductComponent,
-    StarsComponent
+    ProductDetailComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    RouterModule.forRoot(routeConfig)//注入路由配置(主模块)
   ],
   providers: [],
   bootstrap: [AppComponent]

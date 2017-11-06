@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 /**
  * AppComponent是一个普通的typescript类，通过装饰器附加元数据到typescript类上面
  * ng就知道了，要把它变成一个ng组件
- * 
+ *
  * selector：告诉这个组件可以通过app-root'这样一个标签来调用
  * templateUrl： 指定一个html文件作为组件模板
  * styleUrls：指向这个组件模板需要使用到的样式
