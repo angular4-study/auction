@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 
 import {AppComponent} from './app.component';
@@ -15,6 +15,7 @@ import {ProductDetailComponent} from './product-detail/product-detail.component'
 import {HomeComponent} from './home/home.component';
 import {RouterModule, Routes} from '@angular/router';
 import {ProductService} from './shared/product.service';
+import {FilterPipe} from './pipe/filter.pipe';
 
 /**
  * 模块
@@ -35,6 +36,7 @@ const routeConfig: Routes = [
   declarations: [
     AppComponent,
     CarouselComponent,
+    FilterPipe,
     FooterComponent,
     NavbarComponent,
     SearchComponent,
@@ -47,6 +49,7 @@ const routeConfig: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
+    ReactiveFormsModule, // 响应式编程的支持模块
     RouterModule.forRoot(routeConfig) // 注入路由配置(主模块)
   ],
   providers: [ProductService],
