@@ -7,9 +7,9 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class StarsComponent implements OnInit {
 
-  //装饰器：声明rating这个属性应该由父组件传递过来
+  // 装饰器：声明rating这个属性应该由父组件传递过来
   @Input()
-  private rating:number = 0;
+  private rating: number = 0;
 
   private stars: boolean[];
 
@@ -17,10 +17,10 @@ export class StarsComponent implements OnInit {
 
   ngOnInit() {
     this.stars = [];
-    for (let i=1; i<=5;  i++){
+    for (let i = 1; i <= 5;  i++){
       this.stars.push(i > this.rating);
     }
-    //this.stars = [false , false , true , true , true];
+    // this.stars = [false , false , true , true , true];
   }
 
 }
