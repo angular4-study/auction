@@ -14,6 +14,23 @@
 </div>
 
 <div class="well">
+  <div>
+    <button class="btn btn-success" (click)="isCommentHidden = !isCommentHidden">发表评论</button>
+  </div>
+  <div [hidden]="isCommentHidden">
+    <div>
+      <!-- [(rating)] 能这么写，是因为rating和ratingChange的命名，必须这么命名，才能这么写
+       【输出属性名 = 输入属性名 + Change】-->
+      <app-stars [(rating)]="newRating" [readonly]="false"></app-stars>
+    </div>
+    <div>
+      <textarea [(ngModel)]="newComment"></textarea>
+    </div>
+    <div>
+      <button class="btn" (click)="addComment()">提交</button>
+    </div>
+  </div>
+
   <div class="row" *ngFor="let comment of comments">
     <hr>
     <div class="col-md-12">

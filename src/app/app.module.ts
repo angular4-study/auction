@@ -16,6 +16,7 @@ import {HomeComponent} from './home/home.component';
 import {RouterModule, Routes} from '@angular/router';
 import {ProductService} from './shared/product.service';
 import {FilterPipe} from './pipe/filter.pipe';
+import { UserComponent } from './user/user.component';
 
 /**
  * 模块
@@ -36,6 +37,7 @@ const routeConfig: Routes = [
   declarations: [
     AppComponent,
     CarouselComponent,
+    UserComponent,
     FilterPipe,
     FooterComponent,
     NavbarComponent,
