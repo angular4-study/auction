@@ -1,25 +1,14 @@
-import {Injectable} from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
+import {Http, URLSearchParams} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ProductService {
 
-  private products: Product [] = [
-    new Product(1, '第一个商品', 1.99, 3.0, '这是商品的第一个描述，是我在学习慕课网angular入门实战时创建的', ['电子产品', '硬件设备']),
-    new Product(2, '第二个商品', 2.99, 4.0, '这是商品的第二个描述，是我在学习慕课网angular入门实战时创建的', ['图书']),
-    new Product(3, '第三个商品', 3.99, 4.5, '这是商品的第三个描述，是我在学习慕课网angular入门实战时创建的', ['硬件设备']),
-    new Product(4, '第四个商品', 4.99, 1.5, '这是商品的第四个描述，是我在学习慕课网angular入门实战时创建的', ['电子产品', '硬件设备']),
-    new Product(5, '第五个商品', 5.99, 3.5, '这是商品的第五个描述，是我在学习慕课网angular入门实战时创建的', ['电子产品']),
-    new Product(6, '第六个商品', 6.99, 2.5, '这是商品的第六个描述，是我在学习慕课网angular入门实战时创建的', ['图书'])
-  ];
+  searchEvent: EventEmitter<ProductSearchParams> = new EventEmitter();
 
-  private comments: Comment [] = [
-    new Comment(1, 1, '2017-11-01 11:05:00', '张三', 3, '东西1不错'),
-    new Comment(2, 1, '2017-11-02 12:05:00', '李四', 4, '东西2不错'),
-    new Comment(3, 1, '2017-11-03 13:05:00', '王五', 2, '东西3不错'),
-    new Comment(4, 2, '2017-11-04 14:05:00', '赵六', 4, '东西4不错')
-  ];
-
-  constructor() {
+  constructor(private http: Http) {
   }
 
   // 返回所有分类信息，给下拉选
@@ -27,19 +16,47 @@ export class ProductService {
     return ['电子产品', '硬件设备', '图书'];
   }
 
-  getProducts(): Product [] {
-    return this.products;
+  getProducts(): Observable<Product []> {
+    return this.http.get('/api/products').map(res => res.json());
   }
 
-  getProduct(id: number): Product {
-    return this.products.find((product: Product) => product.id == id);
+  getProduct(id: number): Observable<Product> {
+    return this.http.get('/api/product/' + id).map(res => res.json());
   }
 
-  getCommentsForProductId(id: number): Comment [] {
-    return this.comments.filter((comment: Comment) => comment.productId == id);
+  getCommentsForProductId(id: number): Observable<Comment []> {
+    return this.http.get('/api/product/' + id + '/comments').map(res => res.json());
+  }
+
+  search(params: ProductSearchParams): Observable<Product []> {
+    // 查看HTTP类的get方法， 接收的第二个参数必须是URLSearchParams类型，
+    // 所以这里有一个加工参数的方法encodeParams
+    return this.http.get('/api/products', {search: this.encodeParams(params)}).map(res => res.json());
+  }
+
+  /**注意：URLSearchParams有好几个，这里用的是
+   * node_modules\@angular\http\src\url_search_params.d.ts这里的，最好是要import，
+   * 不然达不到效果
+   * */
+  private encodeParams(params: ProductSearchParams) {
+    return Object.keys(params)
+      .filter(key => params[key]) // 过滤掉空的参数
+      .reduce((sum: URLSearchParams, key: string) => { // 将过滤后剩下的装入sum对象中返回
+        sum.append(key, params[key]);
+        return sum;
+      }, new URLSearchParams());
   }
 
 }
+
+export class ProductSearchParams {
+  constructor(public title: string,
+              public price: number,
+              public category: string) {
+
+  }
+}
+
 
 export class Product {
   // 定义一个对象，存放产品信息，在构造函数中声明产品所拥有的属性
@@ -66,3 +83,7 @@ export class Comment {
 
   }
 }
+
+
+
+

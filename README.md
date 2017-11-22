@@ -23,7 +23,7 @@
 	- []assets: 用来存放静态资源
 	- []environments : 环境配置(开发，生产，测试)
 	- index.html : 整个页面的根页面
-	- main.ts ： 整个web应用的入口点，脚本执行的入口点，angualr通过执行这个文件来启动项目
+	- main.ts ： 整个web应用的入口点，脚本执行的入口点，angular通过执行这个文件来启动项目
 	- polyfills.ts : 用来导入必要库，是angular可以正常运行在某些老版本浏览器上
 	- styles.css : 存放整个应用全局的样式
 	- test.ts : 用来做自动化测试的
@@ -42,6 +42,21 @@
 ## 3.使用angular命令行工具，生成组件
 - ng g component myname
 - 上面的命令会在app目录下创建 myname的文件夹，里面有4个文件，然后会更新app.moudle.ts 里面的模块组件配置
+
+## HTTP服务器配置
+- 根目录下新建文件： proxy.conf.json,内容如下：
+```
+{
+  "/api":{ //路由
+    "target":"http://localhost:8000"  // 以此路由开头的请求都转发到此url上(也就是统一网关)
+  }
+}
+```
+- 修改启动脚本，让程序启动呢时，加载这个proxy.conf.json配置：修改package.json,修改start的值，
+加上```--proxy-config proxy.conf.json```
+- 之后必须用npm启动：npm run start
+
+
 
 # Auction
 

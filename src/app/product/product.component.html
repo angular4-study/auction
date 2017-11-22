@@ -1,17 +1,17 @@
-<div class="row">
-  <div class="col-sm-12">
-    <div class="form-group">
-      <!--用formControl指令把input与后台的titleFilter字段绑定在一起，当input里面的值发生改变后
-        会往外发射value change事件，我们要做的就是订阅这个值，进行处理-->
-      <input class="form-control" placeholder="请输入商品名称"
-      [formControl]="titleFilter">
-    </div>
-  </div>
-</div>
+<!--<div class="row">-->
+  <!--<div class="col-sm-12">-->
+    <!--<div class="form-group">-->
+      <!--&lt;!&ndash;用formControl指令把input与后台的titleFilter字段绑定在一起，当input里面的值发生改变后-->
+        <!--会往外发射value change事件，我们要做的就是订阅这个值，进行处理&ndash;&gt;-->
+      <!--<input class="form-control" placeholder="请输入商品名称"-->
+      <!--[formControl]="titleFilter">-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
 
 <!-- 循环products这个属性，每次迭代的是product  -->
 <!-- 拿到列表后，给列表加一个自定义管道（name = filter），过滤数据  -->
-<div *ngFor="let product of products | filter:'title':keyWord" class="col-md-4 col-sm-4 col-lg-4">
+<div *ngFor="let product of products | async" class="col-md-4 col-sm-4 col-lg-4">
   <div class="thumbnail">
     <!-- 标签绑定：把HTML的一个标签的属性和controller上的一个属性绑定 -->
     <img [src]="imgUrl">
