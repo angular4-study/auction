@@ -71,6 +71,8 @@
   - productDetailComponent组件subscribe了webSocketService的返回流，拿到了最新的报价，赋值给自己的成员变量，展示
   到页面
   
+- Http服务。来自于HttpModule，只有在调subscribe时才发请求。
+- WebSocket协议，更简洁高效，是双向的。
 
 # Auction
 
