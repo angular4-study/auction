@@ -74,12 +74,28 @@
 - Http服务。来自于HttpModule，只有在调subscribe时才发请求。
 - WebSocket协议，更简洁高效，是双向的。
 
-# 构建和部署
+# 构建和部署多环境
 ## 构建：编译和合并
-- ng build
+- 1.编译代码：虽然typescript提供了编译器，可以在浏览器运行时编译代码。但是浏览器需要额外
+加载一个typescript编译器，而且每次运行代码都要编译，效率低。所以我们要先编译。
+- 2.合并代码：把所有需要的资源，合并在一起，减少启动时发送http请求的数量
+- ng build ：编译+合并。运行命令后，会在项目里生成dist文件夹。
 
 ## 部署：与服务器整合
-
+- 把构建后生成的文件，和服务器放在一起
+- 当前例子就是：在server项目新建client文件夹，将disk里面的文件全部拷贝进去。
+(即部署到node服务器了)
+- 在服务器主执行的js中，写
+```
+// __dirname代表当前目录，'..'代表上一级目录，'client'代表目标文件夹叫client
+app.use('/', express.static(path.join(__dirname, '..', 'client')));
+```
+- 但是访问后不能刷新，因为刷新时的地址没有api前缀，需要做一些处理。
+- 处理：在app.module.ts的providers中，加一个
+```{provide: LocationStrategy, useClass: HashLocationStrategy}```,意思是使用
+HashLocationStrategy作为地址策略。因为服务器运行的代码是之前编译的代码，本次改了
+代码，所以要重新编译，再放到服务器。加了这个后，端口后面会有一个#符号，作用其实
+就是告诉浏览器，先进到左边地址，再通过路由进到右边地址。
 ## 多环境：一套代码支持多种环境(开发，生产，测试)
 
 # Auction

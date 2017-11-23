@@ -18,6 +18,7 @@ import {ProductService} from './shared/product.service';
 import {FilterPipe} from './pipe/filter.pipe';
 import { UserComponent } from './user/user.component';
 import {WebSocketService} from './shared/web-socket.service';
+import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 
 /**
  * 模块
@@ -34,7 +35,7 @@ const routeConfig: Routes = [
 ];
 
 
-@NgModule({
+@NgModule(<NgModule>{
   declarations: [
     AppComponent,
     CarouselComponent,
@@ -55,7 +56,9 @@ const routeConfig: Routes = [
     ReactiveFormsModule, // 响应式编程的支持模块
     RouterModule.forRoot(routeConfig) // 注入路由配置(主模块)
   ],
-  providers: [ProductService, WebSocketService],
+  providers: [ProductService, WebSocketService,
+    {provide: LocationStrategy, useClass: HashLocationStrategy}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
