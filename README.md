@@ -74,6 +74,14 @@
 - Http服务。来自于HttpModule，只有在调subscribe时才发请求。
 - WebSocket协议，更简洁高效，是双向的。
 
+# 构建和部署
+## 构建：编译和合并
+- ng build
+
+## 部署：与服务器整合
+
+## 多环境：一套代码支持多种环境(开发，生产，测试)
+
 # Auction
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.9.
