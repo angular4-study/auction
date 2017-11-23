@@ -56,7 +56,21 @@
 加上```--proxy-config proxy.conf.json```
 - 之后必须用npm启动：npm run start
 
-
+- **个人对商品搜索功能的理解：**
+  - [涉及的search组件和product组件是叔侄关系，所以这里采用中间人模式(productService的searchEvent即中间人)]
+  - 点击‘搜索’按钮时，触发onSearch方法，向productService的searchEvent发送流(附带表单数据)
+  - 在ProductComponent中subscribe这个流，拿到数据赋值给自己的成员变量，然后在页面通过async异步管道得到数据
+  - 整体思路实质是组件传参。只是解耦了组件
+- **个人对商品关注功能的理解：**
+  - [使用webSocket发请求，长连接，双向]
+  - 点击‘关注’时，触发watchProduct方法。这个方法会去调用webSocketService的createObservableSocket方法，并传入一个
+  webSocket请求地址。
+  - webSocketService的createObservableSocket方法就会创建一个webSocket实例，然后向服务器发送请求，并通过onopen
+  方法，在建立连接时把这个商品的id发到服务器。
+  - express服务器收到商品id后，将最新报价send给客户端(webSocketService)。
+  - productDetailComponent组件subscribe了webSocketService的返回流，拿到了最新的报价，赋值给自己的成员变量，展示
+  到页面
+  
 
 # Auction
 
