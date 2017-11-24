@@ -2,6 +2,7 @@
  * 从ng的核心模块angular/core里引入了一个叫Component的装饰器
  */
 import {Component} from '@angular/core';
+import {environment} from '../environments/environment';
 
 /**
  * AppComponent是一个普通的typescript类，通过装饰器附加元数据到typescript类上面
@@ -21,5 +22,11 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
   title = 'app慕课网angular 入门实战';
+
+  constructor() {
+    console.log(environment.version);
+  }
+
 }

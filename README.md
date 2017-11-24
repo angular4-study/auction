@@ -80,7 +80,7 @@
 加载一个typescript编译器，而且每次运行代码都要编译，效率低。所以我们要先编译。
 - 2.合并代码：把所有需要的资源，合并在一起，减少启动时发送http请求的数量
 - ng build ：编译+合并。运行命令后，会在项目里生成dist文件夹。
-
+- 了解JIT和AOT
 ## 部署：与服务器整合
 - 把构建后生成的文件，和服务器放在一起
 - 当前例子就是：在server项目新建client文件夹，将disk里面的文件全部拷贝进去。
@@ -97,7 +97,32 @@ HashLocationStrategy作为地址策略。因为服务器运行的代码是之前
 代码，所以要重新编译，再放到服务器。加了这个后，端口后面会有一个#符号，作用其实
 就是告诉浏览器，先进到左边地址，再通过路由进到右边地址。
 ## 多环境：一套代码支持多种环境(开发，生产，测试)
+- 项目根目录下有一个angular-cli.json文件，里面的environments属性指定了环境。默认使用dev
+环境
+- main.ts负责运行
+- **切换环境**：在package.json中，修改启动命令，加一个属性【--env=prod】
+- 所以可以把与环境相关的变量，写在对应的environment.ts里，全局使用
+- **指定编译环境**：ng build --env=prod
 
+# 总结：
+- 做项目之前先设计，设计，设计组件关系！
+- 与团队成员沟通，尽量共用组件和服务。
+
+# 开发流程：
+- 使用cli创建新项目
+- 按照设计的组件关系，从上往下编写组件
+- 按照父子关系组装组件并配置路由
+- 在开发环境上测试应用
+- 构建应用并部署到生产/测试环境
+
+# 后续：
+- 高级特性：动画，指令，安全 
+- 周边生态：
+  - [官方] angular Cli: 命令行工具
+  - [官方] angular material: 控件
+  - [官方] angular universal: 服务器端渲染(已集成到angular4中)
+  - ionic: 移动应用开发
+  - native script：移动应用开发
 # Auction
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.9.
